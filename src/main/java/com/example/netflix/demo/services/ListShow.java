@@ -5,6 +5,5 @@ import com.example.netflix.demo.models.Show;
 import java.util.List;
 
 public interface ListShow {
-    List<Show> getAllShows();
-    List<Show> getNumberOfShows(int n);
+    List<Show> getShowsBasedCondition(String country, String count, String startDate, String endDate, String listed_in);
 }

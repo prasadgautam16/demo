@@ -14,12 +14,7 @@ public class ListShowImpl implements ListShow {
     private DAOReadShows daoReadShows;
 
     @Override
-    public List<Show> getAllShows() {
-        return this.daoReadShows.getAllShows();
-    }
-
-    @Override
-    public List<Show> getNumberOfShows(int n) {
-        return this.daoReadShows.getNumberOfShows(n);
+    public List<Show> getShowsBasedCondition(String country, String count, String startDate, String endDate, String listed_in) {
+        return this.daoReadShows.getShowsBasedCondition(country, count, startDate, endDate, listed_in);
     }
 }

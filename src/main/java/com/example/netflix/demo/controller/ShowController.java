@@ -4,12 +4,10 @@ import com.example.netflix.demo.models.Show;
 import com.example.netflix.demo.services.ListShow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.websocket.server.PathParam;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,22 +16,17 @@ public class ShowController {
     @Autowired
     private ListShow listShow;
 
-    // get all shows
+    // get shows based on movieType
     @GetMapping("/tvshows")
-    public List<Show> getAllShows() {
-        List<Show> showList;
-        showList = this.listShow.getAllShows();
-
-        return showList;
-    }
-
-    // get first n course
-    @GetMapping("/tvshows?count={n}")
-    public List<Show> getNumberOfShows(
-            @RequestParam(value="count", required=true) int n
+    public List<Show> getShowsBasedCondition(
+            @RequestParam(value="country", required=false) String country,
+            @RequestParam(value="count", required=false) String count,
+            @RequestParam(value="startDate", required=false) String startDate,
+            @RequestParam(value="endDate", required=false) String endDate,
+            @RequestParam(value="listed_in", required=false) String listed_in
     ) {
         List<Show> showList;
-        showList = this.listShow.getNumberOfShows(n);
+        showList = this.listShow.getShowsBasedCondition(country, count, startDate, endDate, listed_in);
 
         return showList;
     }

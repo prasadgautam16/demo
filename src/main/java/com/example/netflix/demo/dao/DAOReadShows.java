@@ -8,23 +8,70 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
 public class DAOReadShows {
 
-    public static List<Show> getNumberOfShows(int n) {
-        List<Show> showList = getAllShows();
+    public List<Show> getShowsBasedCondition(String country, String count, String startDate, String endDate, String listed_in) {
+        List<Show> listOfShows = new ArrayList<>();
+        try {
 
-        int i = 0;
-        for(Show s : showList) {
+            int n = (null != count) ? Integer.parseInt(count) : 0;
 
+            listOfShows = getAllShows(n);
+
+            // based on country
+            if (null != country) {
+                listOfShows = listOfShows.stream()
+                        .filter(s -> {
+                            String countryIn = s.getCountry();
+                            if (null != countryIn) {
+                                return countryIn.equalsIgnoreCase(country);
+                            }
+                            return false;
+                        })
+                        .toList();
+            }
+
+            // based on listed in
+            if (null != listed_in) {
+                listOfShows = listOfShows.stream()
+                        .filter(s -> {
+                                String[] showListedIn = s.getListed_in();
+                                if (null != showListedIn) {
+                                    return Arrays.stream(showListedIn).anyMatch(listed_in::equalsIgnoreCase);
+                                }
+                                return false;
+                        })
+                        .toList();
+            }
+
+            // show between
+            if (null != startDate && null != endDate) {
+                listOfShows = listOfShows.stream()
+                        .filter(s -> {
+                            LocalDate fromDate = LocalDate.parse(startDate);
+                            LocalDate toDate = LocalDate.parse(endDate);
+                            LocalDate showDate = s.getDate_added();
+                            if (null != showDate) {
+                                return (fromDate.isBefore(showDate) && toDate.isAfter(showDate));
+                            }
+                            return false;
+                        })
+                        .toList();
+            }
+        } catch (Exception e) {
+            System.out.println("SOME ERROR IN getShowsBasedOnMovieType");
         }
 
-        return showList;
+        return listOfShows;
     }
 
-    public static List<Show> getAllShows() {
+    public static List<Show> getAllShows(int n) {
+
+        System.out.println("getAllShows  ");
         String file = "D:\\WORK SPACE\\JAVA\\Project\\demo\\src\\main\\java\\netflix_titles.csv";
         List<Show> showList =new ArrayList<>();
         String line;
@@ -33,10 +80,9 @@ public class DAOReadShows {
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             while( (line = br.readLine()) != null) {
-
-                String [] attributes = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-
+                if (n > 0 && n < i)  break;
                 if (i > 0) {
+                    String[] attributes = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                     Show show = getOneShow(attributes);
                     showList.add(show);
                 }
