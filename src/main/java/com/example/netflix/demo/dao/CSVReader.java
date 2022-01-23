@@ -110,9 +110,9 @@ public class CSVReader {
     }
 
     private static Show getOneShow(String[] attributes) {
-        String showId , type, title, director, cast, country, release_year, rating, duration, description;
+        String showId , type, title, director, country, release_year, rating, duration, description;
         LocalDate date_added;
-        String [] listed_in;
+        String [] listed_in, cast;
         try{
             showId = attributes[0].equalsIgnoreCase("") ? null : attributes[0];
         }
@@ -130,7 +130,7 @@ public class CSVReader {
         }
         catch(Exception e){director = null;}
         try{
-            cast = attributes[4].equalsIgnoreCase("") ? null : attributes[4];
+            cast = attributes[4].equalsIgnoreCase("") ? null : attributes[4].split(", ");
         }
         catch(Exception e){cast = null;}
         try{

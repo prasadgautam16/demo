@@ -19,7 +19,6 @@ public class DAOReadShows {
         String line;
         int i = 0;
         try {
-            System.out.println("HELLO I M  IN DAO READ SHOWS");
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             while( (line = br.readLine()) != null) {
@@ -40,9 +39,9 @@ public class DAOReadShows {
     }
 
     private static Show getOneShow(String[] attributes) {
-        String showId , type, title, director, cast, country, release_year, rating, duration, description;
+        String showId , type, title, director, country, release_year, rating, duration, description;
         LocalDate date_added;
-        String [] listed_in;
+        String [] listed_in, cast;
         try{
             showId = attributes[0].equalsIgnoreCase("") ? null : attributes[0];
         }
@@ -60,7 +59,7 @@ public class DAOReadShows {
         }
         catch(Exception e){director = null;}
         try{
-            cast = attributes[4].equalsIgnoreCase("") ? null : attributes[4];
+            cast = attributes[4].equalsIgnoreCase("") ? null : attributes[4].replaceAll("^\"|\"$", "").split(", ");
         }
         catch(Exception e){cast = null;}
         try{
@@ -85,11 +84,11 @@ public class DAOReadShows {
         }
         catch(Exception e){duration = null;}
         try{
-            listed_in = attributes[10].equalsIgnoreCase("") ? null : attributes[10].split(", ");
+            listed_in = attributes[10].equalsIgnoreCase("") ? null : attributes[10].replaceAll("^\"|\"$", "").split(", ");
         }
         catch(Exception e){listed_in = null;}
         try{
-            description = attributes[11].equalsIgnoreCase("") ? null : attributes[11];
+            description = attributes[11].equalsIgnoreCase("") ? null : attributes[11].replaceAll("^\"|\"$", "");
         }
         catch(Exception e){description = null;}
 

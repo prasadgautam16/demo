@@ -19,7 +19,6 @@ public class ShowController {
     @GetMapping("/shows")
     public List<Show> getAllShows() {
         List<Show> showList;
-        System.out.println("HELLO");
         showList = this.listShow.getAllShows();
 
         return showList;

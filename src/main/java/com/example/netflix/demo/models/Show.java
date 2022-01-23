@@ -9,7 +9,7 @@ public class Show {
         private String type;
         private String title;
         private String director;
-        private String cast;
+        private String[] cast;
         private String country;
         private LocalDate date_added;
         private String release_year;
@@ -18,7 +18,7 @@ public class Show {
         private String[] listed_in;
         private String description;
 
-        public Show(String showId, String type, String title, String director, String cast, String country, LocalDate date_added, String release_year, String rating, String duration, String[] listed_in, String description) {
+        public Show(String showId, String type, String title, String director, String[] cast, String country, LocalDate date_added, String release_year, String rating, String duration, String[] listed_in, String description) {
                 this.showId = showId;
                 this.type = type;
                 this.title = title;
@@ -37,7 +37,7 @@ public class Show {
         public String toString() {
                 return "Show [showId=" + showId + ", type=" + type
                         + ", title=" + title + ", director=" + director
-                        + ", cast=" + cast + ", country=" + country + ", date_added=" + date_added
+                        + ", cast=" + Arrays.toString(cast) + ", country=" + country + ", date_added=" + date_added
                         + ", release_year=" + release_year + ", rating=" + rating + ", duration=" + duration
                         + ", listed_in=" + Arrays.toString(listed_in) + ", description=" + description + "]";
         }
@@ -74,11 +74,11 @@ public class Show {
                 this.director = director;
         }
 
-        public String getCast() {
+        public String[] getCast() {
                 return cast;
         }
 
-        public void setCast(String cast) {
+        public void setCast(String[] cast) {
                 this.cast = cast;
         }
 
