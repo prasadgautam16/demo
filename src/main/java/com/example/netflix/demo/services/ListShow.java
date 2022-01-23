@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ListShow {
     List<Show> getAllShows();
+    List<Show> getNumberOfShows(int n);
 }

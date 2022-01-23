@@ -13,6 +13,17 @@ import java.util.Locale;
 
 public class DAOReadShows {
 
+    public static List<Show> getNumberOfShows(int n) {
+        List<Show> showList = getAllShows();
+
+        int i = 0;
+        for(Show s : showList) {
+
+        }
+
+        return showList;
+    }
+
     public static List<Show> getAllShows() {
         String file = "D:\\WORK SPACE\\JAVA\\Project\\demo\\src\\main\\java\\netflix_titles.csv";
         List<Show> showList =new ArrayList<>();

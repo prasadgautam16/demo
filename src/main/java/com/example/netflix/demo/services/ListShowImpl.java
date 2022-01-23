@@ -17,4 +17,9 @@ public class ListShowImpl implements ListShow {
     public List<Show> getAllShows() {
         return this.daoReadShows.getAllShows();
     }
+
+    @Override
+    public List<Show> getNumberOfShows(int n) {
+        return this.daoReadShows.getNumberOfShows(n);
+    }
 }
