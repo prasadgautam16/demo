@@ -11,7 +11,6 @@ public class BasicAuthenInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String authHeader = request.getHeader("X-Auth-Token");
         if (null != authHeader) {
-            System.out.println("Auth Key"+ authHeader);
             return true;
         } else {
             response.sendError(401, "Unauthorized access!!!!!");

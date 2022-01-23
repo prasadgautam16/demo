@@ -71,7 +71,6 @@ public class DAOReadShows {
 
     public static List<Show> getAllShows(int n) {
 
-        System.out.println("getAllShows  ");
         String file = "D:\\WORK SPACE\\JAVA\\Project\\demo\\src\\main\\java\\netflix_titles.csv";
         List<Show> showList =new ArrayList<>();
         String line;
