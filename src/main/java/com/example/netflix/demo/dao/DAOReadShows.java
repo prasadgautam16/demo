@@ -14,7 +14,7 @@ import java.util.Locale;
 
 public class DAOReadShows {
 
-    public List<Show> getShowsBasedCondition(String country, String count, String startDate, String endDate, String listed_in) {
+    public static List<Show> getShowsBasedCondition(String country, String count, String startDate, String endDate, String listed_in) {
         List<Show> listOfShows = new ArrayList<>();
         try {
 
